@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.ec.bos.ECEvu;
-import org.ec.detector.base.ECGeneral;
-import org.ec.detector.base.ECViewLabel;
 
 
 /**

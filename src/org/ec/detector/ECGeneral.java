@@ -1,4 +1,4 @@
-package org.ec.detector.base;
+package org.ec.detector;
 
 /**
  * This class store the constants used by all the other classes.<br><br>

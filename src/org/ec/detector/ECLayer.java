@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.TreeMap;
 
-import org.ec.detector.base.ECLayerName;
-import org.ec.detector.base.ECViewLabel;
 
 
 /**

@@ -1,4 +1,4 @@
-package org.ec.detector.base;
+package org.ec.detector;
 
 
 /**

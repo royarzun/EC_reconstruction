@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.TreeMap;
 
-import org.ec.detector.base.ECLayerName;
 
 /**
  * The <code>Sector</code> class represents a sector in the EC
