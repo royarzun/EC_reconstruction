@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="EC" basedir="." default="compile">
+	<property name="build.dir" value="build" />
+	<property name="src.dir" value="src" />
+	<property name="test.dir" value="src" />
+	<target description="Creates temporary directories" name="init">
+		<mkdir dir="${build.dir}/classes" />
+	</target>
+	<target depends="init" description="Removes temporary directories" name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+	<target name="compile" depends="init">
+		<javac destdir="${build.dir}/classes" srcdir="${src.dir}" verbose="true" />
+	</target>
+	<target name="run" depends="compile" description="Run a simple test">
+		<java classname="TestDataStructures" failonerror="true" fork="true">
+			<classpath>
+				<pathelement location="${build.dir}/classes" />
+			</classpath>
+		</java>
+	</target>
+</project>
