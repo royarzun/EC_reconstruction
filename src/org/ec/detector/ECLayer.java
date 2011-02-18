@@ -1,7 +1,12 @@
 package org.ec.detector;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.TreeMap;
+
+import org.ec.fit.ECFitHit;
+import org.ec.fit.ECFitPeak;
 
 
 /**
@@ -30,6 +35,7 @@ public class ECLayer
     private ECLayerName name;
 
     private TreeMap<ECViewLabel, ECView> viewList;
+    private ArrayList<ECFitHit> hitList;
 
 
     /**
@@ -49,8 +55,10 @@ public class ECLayer
         this.name   = name;
         this.key    = "S" + sectorID + "." + name;
 
-        // Create the list of views
+        // Create the list of views and hits
         viewList = new TreeMap<ECViewLabel, ECView>();
+        hitList  = new ArrayList<ECFitHit>();
+
         for (ECViewLabel label : ECViewLabel.values()) {
             viewList.put(label, new ECView(label, this.key));
         }
@@ -79,6 +87,49 @@ public class ECLayer
     public ECView getView(ECViewLabel label)
     {
         return viewList.get(label);
+    }
+
+
+    /**
+     * Get the number of found hits in the layer.
+     *
+     * @return  the number of hits
+     */
+    public int getNHits()
+    {
+        return hitList.size();
+    }
+
+
+    /**
+     * Create a new {@link ECFitHit hit} object.  Each hit is identified by a
+     * triplet of peaks, one for each axis.  Set the right correlative ID
+     * number for it.  The created hit is returned, so it can be used and more
+     * of its properties can be set.
+     *
+     * @param u the peak related to the new hit in the U axis
+     * @param v the peak related to the new hit in the V axis
+     * @param w the peak related to the new hit in the W axis
+     * @return  the created hit
+     * @see     ECFitHit
+     */
+    public ECFitHit newHit(ECFitPeak u, ECFitPeak v, ECFitPeak w)
+    {
+        int id = hitList.size() + 1;
+        ECFitHit h = new ECFitHit(id, u, v, w);
+        return h;
+    }
+
+
+    /**
+     * Get the list of all the hits in the layer, to iterate over it.
+     *
+     * @return  a {@link Collection} with the found hits in the layer.
+     * @see     ECFitHit
+     */
+    public Collection<ECFitHit> getHitList()
+    {
+        return Collections.unmodifiableList(hitList);
     }
 
 
