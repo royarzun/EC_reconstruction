@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.ec.bos.ECEvu;
+import org.ec.fit.ECFitPeak;
 
 
 /**
@@ -33,6 +34,7 @@ public class ECView
 
     private ArrayList<ECEvu>     evuList;
     private ArrayList<ECStrip>   stripList;
+    private ArrayList<ECFitPeak> peakList;
 
     // TODO Need a better way to store this calibration information
     public double[] calEch;
@@ -64,6 +66,7 @@ public class ECView
         this.key        = layerKey + "." + label;
         this.evuList    = new ArrayList<ECEvu>();
         this.stripList  = new ArrayList<ECStrip>();
+        this.peakList   = new ArrayList<ECFitPeak>();
 
         this.calEch     = new double[ECGeneral.MAX_STRIPS];
         this.calAtten   = new double[ECGeneral.MAX_STRIPS];
@@ -134,6 +137,44 @@ public class ECView
     public Collection<ECStrip> getStripList()
     {
        return Collections.unmodifiableList(stripList);
+    }
+
+
+    /**
+     * Create a new {@link ECFitPeak} object.  If the used algorithm detects a
+     * peak, then this method creates the object for it, with the right
+     * correlative ID number, and adds it to list of peaks.  This object is
+     * returned so its information can be filled by the algorithm.
+     *
+     * @return  the created peak object
+     */
+    public ECFitPeak newPeak()
+    {
+        ECFitPeak p = new ECFitPeak(peakList.size() + 1, key);
+        peakList.add(p);
+        return p;
+    }
+
+
+    /**
+     * Get the list of detected peaks in the view, to iterate over it.
+     *
+     * @return  a {@link Collection} with the peaks in the view
+     */
+    public Collection<ECFitPeak> getPeakList()
+    {
+       return Collections.unmodifiableList(peakList);
+    }
+
+
+    /**
+     * Get the number of found peaks in the view.
+     *
+     * @return  the number of peaks
+     */
+    public int getNPeaks()
+    {
+        return peakList.size();
     }
 
 

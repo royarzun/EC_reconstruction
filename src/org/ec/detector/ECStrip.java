@@ -18,6 +18,9 @@ public class ECStrip
     private double energy;
     private double time;
 
+    private double peakEnergy;
+    private double peakEfr;
+
 
     /**
      * Create an object for a strip in a view in the EC.  This strips belongs
@@ -33,6 +36,7 @@ public class ECStrip
         this.ID         = id;
         this.energy     = 0.0;
         this.time       = 0.0;
+        this.peakEnergy = 0.0;
     }
 
 
@@ -50,6 +54,7 @@ public class ECStrip
         this.ID         = id;
         this.energy     = energy;
         this.time       = 0.0;
+        this.peakEnergy = 0.0;
     }
 
 
@@ -57,6 +62,7 @@ public class ECStrip
      * Set the calculated energy of the strip.
      *
      * @param energy  the energy to set
+     * @see   #setPeakEnergy
      */
     public void setEnergy(double energy)
     {
@@ -68,6 +74,7 @@ public class ECStrip
      * Get the calculated energy of the strip.
      *
      * @return  the energy
+     * @see     #getPeakEnergy
      */
     public double getEnergy()
     {
@@ -94,6 +101,51 @@ public class ECStrip
     public double getTime()
     {
         return time;
+    }
+
+
+    /**
+     * Set the energy of the strip.
+     *
+     * @param energy  the energy to set
+     * @see           #setEnergy
+     */
+    public void setPeakEnergy(double energy)
+    {
+        this.peakEnergy = energy;
+    }
+
+    /*
+     * Get the energy of the strip.
+     *
+     * @return the energy
+     * @see    #getEnergy
+     */
+    public double getPeakEnergy()
+    {
+        return peakEnergy;
+    }
+
+
+    /**
+     * TODO Find out the right comment to put here.
+     *
+     * @param peakEfr the peakEfr to set
+     */
+    public void setPeakEfr(double peakEfr)
+    {
+        this.peakEfr = peakEfr;
+    }
+
+
+    /**
+     * TODO Find out the right comment to put here.
+     *
+     * @return the peakEfr
+     */
+    public double getPeakEfr()
+    {
+        return peakEfr;
     }
 
 
