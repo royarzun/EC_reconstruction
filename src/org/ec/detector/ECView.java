@@ -31,6 +31,7 @@ public class ECView
 {
     private ECViewLabel label;
     private String      key;
+    private double      length;
 
     private ArrayList<ECEvu>     evuList;
     private ArrayList<ECStrip>   stripList;
@@ -175,6 +176,28 @@ public class ECView
     public int getNPeaks()
     {
         return peakList.size();
+    }
+
+
+    /**
+     * Set the length of the view's side.
+     *
+     * @param length  the length to set
+     */
+    public void setLength(double length)
+    {
+        this.length = length;
+    }
+
+
+    /**
+     * Get the length of the view's side
+     *
+     * @return  the length of the side
+     */
+    public double getLength()
+    {
+        return length;
     }
 
 

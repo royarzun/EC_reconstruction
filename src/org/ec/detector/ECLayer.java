@@ -145,6 +145,18 @@ public class ECLayer
 
 
     /**
+     * Get the length of a side.
+     *
+     * @param view  the desired side
+     * @return      the length of the side
+     */
+    public double getEdgeL(ECViewLabel view)
+    {
+        return viewList.get(view).getLength();
+    }
+
+
+    /**
      * Set the total energy of the found hits in the layer.
      *
      * @param energy  the amount of energy to set
