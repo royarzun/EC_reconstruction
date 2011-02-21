@@ -3,6 +3,7 @@ package org.ec.detector;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 
 import org.ec.bos.ECEvu;
 import org.ec.fit.ECFitPeak;
@@ -169,6 +170,17 @@ public class ECView
 
 
     /**
+     * Sort the list of peaks using the provided {@link Comparator}.
+     *
+     * @param c  the Comparator object
+     */
+    public  void sortPeaks(Comparator<ECFitPeak> c)
+    {
+        Collections.sort(peakList, c);
+    }
+
+
+    /**
      * Get the number of found peaks in the view.
      *
      * @return  the number of peaks
@@ -180,6 +192,15 @@ public class ECView
 
 
     /**
+     * Reset the number of detected peaks in the view to zero.
+     */
+    public void clearPeakList()
+    {
+        peakList.clear();
+    }
+
+
+    /**
      * Set the length of the view's side.
      *
      * @param length  the length to set
@@ -187,6 +208,18 @@ public class ECView
     public void setLength(double length)
     {
         this.length = length;
+    }
+
+
+    /**
+     * Resize the list of peaks to the given size.  The list keeps the
+     * elements with index between <code>0</code> and <code>size - 1</code>.
+     *
+     * @param size  the number of elements to keep in the list
+     */
+    public void resizePeakList(int size)
+    {
+        peakList = (ArrayList<ECFitPeak>) peakList.subList(0, size + 1);
     }
 
 

@@ -3,6 +3,7 @@ package org.ec.detector;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.TreeMap;
 
 import org.ec.fit.ECFitHit;
@@ -141,6 +142,54 @@ public class ECLayer
     public Collection<ECFitHit> getHitList()
     {
         return Collections.unmodifiableList(hitList);
+    }
+
+
+    /**
+     * Get a sublist of the found hits in the layer. This sublist starts
+     * from the position given by the index parameter, to the end of the list
+     * of hits.
+     *
+     * @param index the index of the starting hit in the sublist
+     * @return      a {@link Collection} with the sublist of the found hits
+     */
+    public Collection<ECFitHit> getHitList(int index)
+    {
+        int n = hitList.size();
+        Collection<ECFitHit> sublist = hitList.subList(index, n + 1);
+        return Collections.unmodifiableCollection(sublist);
+    }
+
+
+    /**
+     * Sort the list of hits using the provided {@link Comparator}.
+     *
+     * @param c  the Comparator object
+     */
+    public  void sortHits(Comparator<ECFitHit> c)
+    {
+        Collections.sort(hitList, c);
+    }
+
+
+    /**
+     * Reset the number of found hits in the layer to zero.
+     */
+    public void clearHitList()
+    {
+        hitList.clear();
+    }
+
+
+    /**
+     * Resize the list of hits to the given size.  The list keeps the elements
+     * with index between <code>0</code> and <code>size - 1</code>.
+     *
+     * @param size  the number of elements to keep in the list
+     */
+    public void resizeHitList(int size)
+    {
+        hitList = (ArrayList<ECFitHit>) hitList.subList(0, size + 1);
     }
 
 
