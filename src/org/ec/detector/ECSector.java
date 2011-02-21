@@ -1,6 +1,7 @@
 package org.ec.detector;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 
@@ -31,6 +32,8 @@ public class ECSector
     private int ID;
     private TreeMap<ECLayerName, ECLayer> layerList;
 
+    private double phi;
+    private HashMap<String, Double> origins;
 
     /**
      * Construct an object representing the EC sector with the given ID.
@@ -42,6 +45,14 @@ public class ECSector
     public ECSector(int id)
     {
         this.ID  = id;
+        this.phi = 0;
+
+        // Create the hash for the local coordinate system
+        this.origins   = new HashMap<String, Double>();
+
+        origins.put("x", 0.0);
+        origins.put("y", 0.0);
+        origins.put("z", 0.0);
 
         // Create the layer list
         this.layerList = new TreeMap<ECLayerName, ECLayer>();
@@ -73,6 +84,63 @@ public class ECSector
     public ECLayer getLayer(ECLayerName name)
     {
         return layerList.get(name);
+    }
+
+
+    /**
+     * Set the phi angle of the sector.
+     *
+     * @param phi the phi to set
+     */
+    public void setPhi(double phi)
+    {
+        this.phi = phi;
+    }
+
+
+    /**
+     * Get the phi angle of the sector.
+     *
+     * @return the phi angle
+     */
+    public double getPhi()
+    {
+        return phi;
+    }
+
+
+    /**
+     *  Get the origin of the local coordinate system.  This method gets the
+     *  origin of one axis at the time.  Each of the three axes is represented
+     *  by a letter, that can be <code>"x"</code>, <code>"y"</code> or
+     *  <code>"z"</code>.
+     *
+     * @param axis the desired axis
+     * @return     the origin of the local coordinate system for the given
+     *             axis
+     */
+    public double getOrigins(String axis)
+    {
+        if (origins.containsKey(axis))
+            return origins.get(axis);
+        else
+            return 0.0;
+    }
+
+
+    /**
+     * Set the origin of the local coordinate system in the sector.  This
+     * method sets the origin of one axis at the time.  Each of the three axes
+     * is represented by a letter that must be pased as parameter, and it can
+     * be <code>"x"</code>, <code>"y"</code> or <code>"z"</code>.
+     *
+     * @param axis     the axis to set
+     * @param position the position for the given axis
+     */
+    public void setOrigins(String axis, double position)
+    {
+        if (origins.containsKey(axis))
+            origins.put(axis, position);
     }
 
 

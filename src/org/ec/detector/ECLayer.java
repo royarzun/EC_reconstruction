@@ -37,6 +37,15 @@ public class ECLayer
     private TreeMap<ECViewLabel, ECView> viewList;
     private ArrayList<ECFitHit> hitList;
 
+    private double energy;
+
+    private double depth;
+    private double H;
+    private double H1;
+    private double H2;
+
+    private int    maxStrips;
+
 
     /**
      * Construct an object representing the EC layer of the given name.  This
@@ -54,6 +63,8 @@ public class ECLayer
     {
         this.name   = name;
         this.key    = "S" + sectorID + "." + name;
+
+        this.energy = 0.0;
 
         // Create the list of views and hits
         viewList = new TreeMap<ECViewLabel, ECView>();
@@ -130,6 +141,138 @@ public class ECLayer
     public Collection<ECFitHit> getHitList()
     {
         return Collections.unmodifiableList(hitList);
+    }
+
+
+    /**
+     * Set the total energy of the found hits in the layer.
+     *
+     * @param energy  the amount of energy to set
+     */
+    public void setEnergy(double energy)
+    {
+        this.energy = energy;
+    }
+
+
+    /**
+     * Get the total energy of the found hits in the layer.
+     *
+     * @return the amount of energy
+     */
+    public double getEnergy()
+    {
+        return energy;
+    }
+
+
+    /**
+     * Set the depth of the layer
+     *
+     * @param depth the depth to set
+     */
+    public void setDepth(double depth)
+    {
+        this.depth = depth;
+    }
+
+
+    /**
+     * Get the depth of the layer
+     *
+     * @return the depth of the layer
+     */
+    public double getDepth()
+    {
+        return depth;
+    }
+
+
+    /**
+     * TODO Find out the right comment to put here.
+     */
+    public void setH(double h)
+    {
+        H = h;
+    }
+
+
+    /**
+     * TODO Find out the right comment to put here.
+     *
+     * @return the h
+     */
+    public double getH()
+    {
+        return H;
+    }
+
+
+    /**
+     * TODO Find out the right comment to put here.
+     *
+     * @param h1 the h1 to set
+     */
+    public void setH1(double h1)
+    {
+        H1 = h1;
+    }
+
+
+    /**
+     * TODO Find out the right comment to put here.
+     *
+     * @return the h1
+     */
+    public double getH1()
+    {
+        return H1;
+    }
+
+
+    /**
+     * TODO Find out the right comment to put here.
+     *
+     * @param h2 the h2 to set
+     */
+    public void setH2(double h2)
+    {
+        H2 = h2;
+    }
+
+
+    /**
+     * TODO Find out the right comment to put here.
+     *
+     * @return the h2
+     */
+    public double getH2()
+    {
+        return H2;
+    }
+
+
+    /**
+     * Set the maximum number of strips for the layer.  Not all the layers
+     * have the same maximum for the number of strips in its views.
+     *
+     * @param maxStrips the maximum to set
+     */
+    public void setMaxStrips(int maxStrips)
+    {
+        this.maxStrips = maxStrips;
+    }
+
+
+    /**
+     * Get the maximum number of strips for the layer.  Not all the layers
+     * have the same maximum for the number of strips in its views.
+     *
+     * @return the maximum number of strips
+     */
+    public int getMaxStrips()
+    {
+        return maxStrips;
     }
 
 

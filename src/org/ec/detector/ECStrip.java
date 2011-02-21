@@ -18,6 +18,8 @@ public class ECStrip
     private double energy;
     private double time;
 
+    private double rawAdcs;
+
     private double peakEnergy;
     private double peakEfr;
 
@@ -146,6 +148,28 @@ public class ECStrip
     public double getPeakEfr()
     {
         return peakEfr;
+    }
+
+
+    /**
+     * Set the raw ADC of the strip.
+     *
+     * @param  rawAdcs  the raw ADC to set
+     */
+    public void setRawAdcs(double rawAdcs)
+    {
+        this.rawAdcs = rawAdcs;
+    }
+
+
+    /**
+     * Get the raw ADC of the strip.
+     *
+     * @return  the raw ADC
+     */
+    public double getRawAdcs()
+    {
+        return rawAdcs;
     }
 
 
