@@ -29,4 +29,13 @@ public final class ECGeneral
     public final static double  DEFAULT_TCH            =      0.050;
     public final static double  DEFAULT_TRMS           =      1.0;
     public final static double  DEFAULT_ATTEN          =    376.0;
+
+    // Control
+    public static int           TOUCH_ID               =      0;
+    public static boolean       LN_WEIGHTS             =      true;
+    public static double        STRIP_THRESHOLD        =      0.001;
+    public static double        PEAK_THRESHOLD         =      0.003;
+    public static double        HIT_THRESHOLD          =      0.010;
+    public static int           MAX_EC_STRIPS          =     36;
+    public static int           MAX_PCAL_STRIPS        =    108;
 }
