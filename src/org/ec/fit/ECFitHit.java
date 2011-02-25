@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import org.ec.detector.ECLayer;
+import org.ec.detector.ECLayerName;
 import org.ec.detector.ECViewLabel;
 
 
@@ -38,6 +40,9 @@ public class ECFitHit
 
     private TreeMap<ECViewLabel, ECPeakHit> peakHitList;
 
+    private TreeMap<ECLayerName, ECFitHit>  matched;
+    private TreeMap<ECLayerName, Double>    c2matched;
+
     private int nStrips;
 
 
@@ -55,7 +60,7 @@ public class ECFitHit
      * @param v   the peak for the hit in the view V
      * @param w   the peak for the hit in the view W
      */
-    public ECFitHit(int id, ECFitPeak u, ECFitPeak v, ECFitPeak w)
+    public ECFitHit(int id, ECFitPeak u, ECFitPeak v, ECFitPeak w, ECLayer layer)
     {
         this.ID      = id;
 
@@ -71,6 +76,18 @@ public class ECFitHit
         peakHitList.put(ECViewLabel.U, new ECPeakHit(this, u));
         peakHitList.put(ECViewLabel.V, new ECPeakHit(this, v));
         peakHitList.put(ECViewLabel.W, new ECPeakHit(this, w));
+
+        // Create matched sets
+        matched   = new TreeMap<ECLayerName, ECFitHit>();
+        c2matched = new TreeMap<ECLayerName, Double>();
+
+        ECLayerName layerName = layer.getName();
+        for (ECLayerName name : ECLayerName.values()) {
+            if (name != layerName) {
+                matched.put(name, null);
+                c2matched.put(name, 0.0);
+            }
+        }
     }
 
 
@@ -378,6 +395,54 @@ public class ECFitHit
      */
     public int getNStrips() {
         return nStrips;
+    }
+
+
+    /**
+     * Set the hit in the desired layer that matches this hit.
+     *
+     * @param layer  the matching layer
+     * @param hit    the hit matching this hit in that layer
+     */
+    public void setMatch(ECLayer layer, ECFitHit hit)
+    {
+        matched.put(layer.getName(), hit);
+    }
+
+
+    /**
+     * Get the hit in the desired layer that matches this hit.
+     *
+     * @param layer  the matching layer
+     * @return       the hit matching this hit in that layer
+     */
+    public ECFitHit getMatch(ECLayer layer)
+    {
+        return matched.get(layer.getName());
+    }
+
+
+    /**
+     * Set the c2match of the hit with the given layer.
+     *
+     * @param layer  the matching layer
+     * @param value  the c2match of the hit with the layer
+     */
+    public void setC2Match(ECLayer layer, double value)
+    {
+        c2matched.put(layer.getName(), value);
+    }
+
+
+    /**
+     * Get the c2match of the hit with the given layer.
+     *
+     * @param layer  the matching layer
+     * @return       the c2 match of the hit with the layer
+     */
+    public double getC2Match(ECLayer layer)
+    {
+        return c2matched.get(layer.getName());
     }
 
 

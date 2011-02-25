@@ -128,7 +128,7 @@ public class ECLayer
     public ECFitHit newHit(ECFitPeak u, ECFitPeak v, ECFitPeak w)
     {
         int id = hitList.size() + 1;
-        ECFitHit h = new ECFitHit(id, u, v, w);
+        ECFitHit h = new ECFitHit(id, u, v, w, this);
         return h;
     }
 

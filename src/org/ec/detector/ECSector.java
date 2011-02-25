@@ -35,6 +35,8 @@ public class ECSector
     private double phi;
     private HashMap<String, Double> origins;
 
+    private TreeMap<ECLayerName, TreeMap<ECLayerName, Integer>> nmatch;
+
     /**
      * Construct an object representing the EC sector with the given ID.
      * Initialize all the properties to zero and create the list of the four
@@ -58,6 +60,14 @@ public class ECSector
         this.layerList = new TreeMap<ECLayerName, ECLayer>();
         for (ECLayerName name : ECLayerName.values()) {
             layerList.put(name, new ECLayer(name, id));
+        }
+
+        this.nmatch = new TreeMap<ECLayerName, TreeMap<ECLayerName,Integer>>();
+        for (ECLayerName n1 : ECLayerName.values()) {
+            TreeMap<ECLayerName, Integer> secondKey = new TreeMap<ECLayerName, Integer>();
+            nmatch.put(n1, secondKey);
+            for (ECLayerName n2 : ECLayerName.values())
+                if (n1 != n2) nmatch.get(n1).put(n2, 0);
         }
     }
 
@@ -141,6 +151,46 @@ public class ECSector
     {
         if (origins.containsKey(axis))
             origins.put(axis, position);
+    }
+
+
+    /**
+     * Get the number of matches between layers l1 and l2
+     *
+     * @param l1  the first layer
+     * @param l2  the second layer
+     *
+     * @return  the number of matches between layers
+     */
+    public int getNmatch(ECLayerName l1, ECLayerName l2)
+    {
+        return nmatch.get(l1).get(l2);
+    }
+
+
+    /**
+     * Increase the number of matches between layers l1 and l2 by one.
+     *
+     * @param l1  the first layer
+     * @param l2  the second layer
+     */
+    public void addMatch(ECLayer l1, ECLayer l2)
+    {
+        int n = nmatch.get(l1.getName()).get(l2.getName()) - 1;
+        nmatch.get(l1.getName()).put(l2.getName(), n);
+    }
+
+
+    /**
+     * Reduce the number of matches between layers l1 and l2 by one.
+     *
+     * @param l1  the first layer
+     * @param l2  the second layer
+     */
+    public void substractMatch(ECLayer l1, ECLayer l2)
+    {
+        int n = nmatch.get(l1.getName()).get(l2.getName()) - 1;
+        nmatch.get(l1.getName()).put(l2.getName(), n);
     }
 
 
