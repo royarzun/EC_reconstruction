@@ -38,4 +38,5 @@ public final class ECGeneral
     public static double        HIT_THRESHOLD          =      0.010;
     public static int           MAX_EC_STRIPS          =     36;
     public static int           MAX_PCAL_STRIPS        =    108;
+    public static double        EC_MATCH               =      3;
 }

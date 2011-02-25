@@ -33,6 +33,7 @@ public class ECFitHit
     private double width;
     private double time;
     private double ch2;
+    private double thick;
 
     private HashMap<String, Double> clasCoordinates;
     private HashMap<String, Double> localCoordinates;
@@ -73,6 +74,8 @@ public class ECFitHit
         initializeCoordinates();
 
         // Create PeakHit objects
+        peakHitList = new TreeMap<ECViewLabel, ECPeakHit>();
+
         peakHitList.put(ECViewLabel.U, new ECPeakHit(this, u));
         peakHitList.put(ECViewLabel.V, new ECPeakHit(this, v));
         peakHitList.put(ECViewLabel.W, new ECPeakHit(this, w));
@@ -443,6 +446,28 @@ public class ECFitHit
     public double getC2Match(ECLayer layer)
     {
         return c2matched.get(layer.getName());
+    }
+
+
+    /**
+     * Set the thick of the hit
+     *
+     * @param thick  the thick to set
+     */
+    public void setThick(double thick)
+    {
+        this.thick = thick;
+    }
+
+
+    /**
+     * Get the thick of the hit
+     *
+     * @return  the thick
+     */
+    public double getThick()
+    {
+        return thick;
     }
 
 
